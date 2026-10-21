@@ -1,0 +1,11 @@
+--extra-index-url https://download.pytorch.org/whl/cu124
+
+autodistill-grounded-sam==0.1.2
+autodistill==0.1.29
+supervision==0.31.0
+roboflow==1.7.1
+scikit-learn==1.7.2
+transformers==4.46.3
+tokenizers==0.20.3
+torch==2.6.0+cu124
+torchvision==0.21.0+cu124

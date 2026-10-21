@@ -51,8 +51,13 @@ With the virtual environment active, install the packages used by the script:
 
 ```powershell
 python -m pip install --upgrade pip
-python -m pip install autodistill-grounded-sam autodistill supervision
+python -m pip install -r .\requirements.txt
 ```
+
+The versions are pinned to the known-working Windows GPU environment. This
+uses CUDA 12.4 wheels, so an NVIDIA GPU and a compatible NVIDIA driver are
+required. If you do not need GPU acceleration, replace the Torch entries with
+a matching CPU-only pair from the [official PyTorch selector](https://pytorch.org/get-started/locally/).
 
 ## Add images and run labeling
 
@@ -111,10 +116,19 @@ The output should end with:
 \.venv\Scripts\python.exe
 ```
 
-Check that the main packages are installed:
+Check that the main packages are installed and consistent:
 
 ```powershell
-python -m pip show autodistill-grounded-sam autodistill supervision
+python -m pip check
+python -m pip show autodistill-grounded-sam autodistill supervision roboflow scikit-learn torch torchvision
+```
+
+If importing Torch fails with `WinError 1114` and a reference to `c10.dll`,
+check that the NVIDIA driver is installed and then reinstall the pinned
+environment:
+
+```powershell
+python -m pip install --force-reinstall -r .\requirements.txt
 ```
 
 If a previous run produced poor labels, run the script again after changing
